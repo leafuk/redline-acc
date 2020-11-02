@@ -1,10 +1,3 @@
-<!-- https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js -->
-<!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> -->
-
-
-
-
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -319,7 +312,6 @@
                                 </div>
                             </div>
                             </div> -->
-                            <hr class="mb-4">
                             <!-- <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="same-address">
                             <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
@@ -379,7 +371,7 @@
                             <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button> -->
                         </form>
 
-
+                        <hr class="mb-4">
             
                         <pre class="text-muted" data-bind="text: JSON.stringify(ko.mapping.toJS($root.settings, mapping), null, 2);"></pre>
                         
@@ -394,18 +386,41 @@
             
                 <form class="needs-validation" novalidate data-bind="using: event">
 
-                    <div class="mb-3">
-                        <label for="password">Track</label>
-                        <select data-bind="foreach: availableTracks, value:track" class="form-control dropdown">
-                            <optgroup data-bind="attr: {label: label}, foreach: children">
-                                <option data-bind="text: label, value: value"></option>
-                            </optgroup>
-                        </select>
-                        <small class="text-muted">The track we run, see “Track name list”. Setting a wrong value
-                            will also print out the available track keys in the log. With the
-                            1.1 update containing the 2019 season content, each track has a
-                            _2019 variant. Using this track will set the BoP and track grip
-                            correspondingly</small>
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="track">Track</label>
+                            <select data-bind="foreach: availableTracks, value:track" class="form-control dropdown">
+                                <optgroup data-bind="attr: {label: label}, foreach: children">
+                                    <option data-bind="text: label, value: value"></option>
+                                </optgroup>
+                            </select>
+                            <small class="text-muted">The track we run, see “Track name list”. Setting a wrong value
+                                will also print out the available track keys in the log. With the
+                                1.1 update containing the 2019 season content, each track has a
+                                _2019 variant. Using this track will set the BoP and track grip
+                                correspondingly</small>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="carGroup">Car Group</label>
+                            <select data-bind="value: carGroup, options: availableCarGroup,
+                                optionsText: 'name',
+                                optionsValue: 'id'"
+                            class="form-control dropdown">
+                            </select>
+                            <small class="text-muted">
+                                Defines the car group for this server. Possible values are
+                                <ul>
+                                    <li>FreeForAll = where “FreeForAll” will allow any driver to join with any car ( that he defined as Primary Car ).</li>
+                                    <li>GT3 = Limit this server to GT3 Vehicles</li>
+                                    <li>GT4 = Limit this server to GT4 Vehicles</li>
+                                    <li>Cup = Limit this server to Porsche 991 II GT3 Cup</li>
+                                    <li>ST = Limit this server to Lamborghini Supertrofeo</li>
+                                </ul>
+                            </small>
+                        </div>
+
                     </div>
 
                     <div class="row" >

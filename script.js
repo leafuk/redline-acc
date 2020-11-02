@@ -76,6 +76,7 @@ function eventModel(sessions) {
     var self = this;
 
     self.track = ko.observable('silverstone');
+    self.carGroup = ko.observable('FreeForAll');
 
     self.preRaceWaitingTimeSeconds = ko.numericObservable(30);
     self.sessionOverTimeSeconds = ko.numericObservable(150);
@@ -128,6 +129,14 @@ function eventModel(sessions) {
             new Option("Laguna Seca", "laguna_seca_2019"),
         ])
     ]),
+
+    self.availableCarGroup = ko.observableArray([
+        { name: 'Any', id: 'FreeForAll' },
+        { name: 'GT3', id: 'GT3' },
+        { name: 'GT4', id: 'GT4' },
+        { name: 'Porsche 991 II GT3 Cup', id: 'Cup' },
+        { name: 'Lamborghini Supertrofeo', id: 'ST' }
+    ]);
 
     self.availableHoursOfDay = ko.observableArray(Array.from(Array(24).keys()));
     self.availableTimeMultipliers = ko.observableArray(Array.from(Array(25).keys()));
@@ -219,6 +228,7 @@ var mapping = {
         "availableSessionTypes",
         "availableDayOfWeekend",
         "availableWeatherRandomness",
+        "availableCarGroup",
     ]
 }
 
