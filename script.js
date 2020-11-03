@@ -366,5 +366,5 @@ netlifyIdentity.on('logout', () =>
 {
     console.log('Logged out');
 
-    viewModel.default.clearPresets();
+    viewModel.defaults.clearPresets();
 });
