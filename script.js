@@ -368,3 +368,62 @@ netlifyIdentity.on('logout', () =>
 
     viewModel.defaults.clearPresets();
 });
+
+function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Fallback: Copying text command was ' + msg);
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+    }
+
+    document.body.removeChild(textArea);
+};
+
+function copyTextToClipboard(text) {
+    if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(text);
+        return;
+    }
+    navigator.clipboard.writeText(text).then(function() {
+        console.log('Async: Copying to clipboard was successful!');
+        $('.toast').toast('show');
+    }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+    });
+};
+
+var copySettingsBtn = document.querySelector('.copy-settings-btn'),
+    copyEventBtn = document.querySelector('.copy-event-btn'),
+    copyEventRulesBtn = document.querySelector('.copy-eventrules-btn');
+
+var settingsJson = document.querySelector('.settings-json'),
+    eventJson = document.querySelector('.event-json'),
+    eventrulesJson = document.querySelector('.eventrules-json');
+
+copySettingsBtn.addEventListener('click', function(event) {
+    copyTextToClipboard(settingsJson.innerHTML);
+});
+
+copyEventBtn.addEventListener('click', function(event) {
+    copyTextToClipboard(eventJson.innerHTML);
+});
+
+copyEventRulesBtn.addEventListener('click', function(event) {
+    copyTextToClipboard(eventrulesJson.innerHTML);
+});
+
+$('.toast').toast({ delay: 1000 });

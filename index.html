@@ -258,133 +258,19 @@
                                 </div>  
                                 <small class="text-muted">If set to 1, the server will change to a random track when the last drivers leaves ( which causes a reset to FP1 ). The “track” property will only define the default state for the first session.</small>
                             </div>
-            
-                            <!-- <div class="mb-3">
-                                <label for="username">Username</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                    <span class="input-group-text">@</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="username" placeholder="Username" required>
-                                    <div class="invalid-feedback" style="width: 100%;">
-                                    Your username is required.
-                                    </div>
-                                </div>
-                            </div> -->
-            
-                            <!-- <div class="mb-3">
-                            <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                            <div class="invalid-feedback">
-                                Please enter a valid email address for shipping updates.
-                            </div>
-                            </div> -->
-            
-                            <!-- <div class="mb-3">
-                            <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
-                            </div> -->
-            
-                            <!-- <div class="mb-3">
-                            <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-                            </div> -->
-            
-                            <!-- <div class="row">
-                            <div class="col-md-5 mb-3">
-                                <label for="country">Country</label>
-                                <select class="custom-select d-block w-100" id="country" required>
-                                <option value="">Choose...</option>
-                                <option>United States</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                Please select a valid country.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="state">State</label>
-                                <select class="custom-select d-block w-100" id="state" required>
-                                <option value="">Choose...</option>
-                                <option>California</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                Please provide a valid state.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="zip">Zip</label>
-                                <input type="text" class="form-control" id="zip" placeholder="" required>
-                                <div class="invalid-feedback">
-                                Zip code required.
-                                </div>
-                            </div>
-                            </div> -->
-                            <!-- <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="same-address">
-                            <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                            </div>
-                            <div class="custom-control custom-radio"> -->
-                            <!-- <input type="checkbox" class="custom-control-input" id="save-info" data-bind="checked: isCPServer, checkedValue: 1, checked: isCPServer" /> -->
-                            <!-- <label class="custom-control-label" for="save-info">Is CP Server</label> -->
-                            <!-- </div>
-                            <hr class="mb-4"> -->
-            
-                            <!-- <h4 class="mb-3">Is CP Server?</h4>
-            
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input id="cpServerYes" name="IsCPServer" type="radio" class="custom-control-input" data-bind = "checked: isCPServer, checkedValue: 1" required>
-                                    <label class="custom-control-label" for="cpServerYes">Yes</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="cpServerNo" name="IsCPServer" type="radio" class="custom-control-input" data-bind = "checked: isCPServer, checkedValue: 0" required>
-                                    <label class="custom-control-label" for="cpServerNo">No</label>
-                                </div>  
-                            </div> -->
-                            <!-- <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="cc-name">Name on card</label>
-                                <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                                <small class="text-muted">Full name as displayed on card</small>
-                                <div class="invalid-feedback">
-                                Name on card is required
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="cc-number">Credit card number</label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                <div class="invalid-feedback">
-                                Credit card number is required
-                                </div>
-                            </div>
-                            </div> -->
-                            <!-- <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="cc-expiration">Expiration</label>
-                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                <div class="invalid-feedback">
-                                Expiration date required
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="cc-cvv">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                <div class="invalid-feedback">
-                                Security code required
-                                </div>
-                            </div>
-                            </div> -->
-                            <!-- <hr class="mb-4">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button> -->
                         </form>
 
                         <hr class="mb-4">
-            
-                        <pre class="text-muted" data-bind="text: JSON.stringify(ko.mapping.toJS($root.settings, mapping), null, 2);"></pre>
-                        <pre class="text-muted" data-bind="text: JSON.stringify(ko.mapping.toJS($root.defaults, mapping), null, 2);"></pre>
+
+                        <div style="position: relative; min-height: 200px;">
+                            <button class="btn btn-info float-right copy-settings-btn">Copy</button>
+                            <div class="toast" style="position: absolute; top: 0px; right: 80px;">
+                                <div class="toast-body">
+                                  Config copied to clipboard.
+                                </div>
+                              </div>
+                            <pre class="text-muted settings-json" data-bind="text: JSON.stringify(ko.mapping.toJS($root.settings, mapping), null, 2);"></pre>
+                        </div>
                         
 
                     <!-- </div> -->
@@ -615,7 +501,15 @@
 
                 <hr class="mb-4">
 
-                <pre class="text-muted" data-bind="text: JSON.stringify(ko.mapping.toJS($root.event, mapping), null, 2);"></pre>
+                <div style="position: relative; min-height: 200px;">
+                    <button class="btn btn-info float-right copy-event-btn">Copy</button>
+                    <div class="toast" style="position: absolute; top: 0px; right: 80px;">
+                        <div class="toast-body">
+                            Config copied to clipboard.
+                        </div>
+                    </div>
+                    <pre class="text-muted event-json" data-bind="text: JSON.stringify(ko.mapping.toJS($root.event, mapping), null, 2);"></pre>
+                </div>
 
             </div>
 
@@ -728,7 +622,15 @@
                 
                 <hr class="mb-4">
 
-                <pre class="text-muted" data-bind="text: JSON.stringify(ko.mapping.toJS($root.eventRules, mapping), null, 2);"></pre>
+                <div style="position: relative; min-height: 200px;">
+                    <button class="btn btn-info float-right copy-eventrules-btn">Copy</button>
+                    <div class="toast" style="position: absolute; top: 0px; right: 80px;">
+                        <div class="toast-body">
+                          Config copied to clipboard.
+                        </div>
+                      </div>
+                    <pre class="text-muted eventrules-json" data-bind="text: JSON.stringify(ko.mapping.toJS($root.eventRules, mapping), null, 2);"></pre>
+                </div>
 
             </div>
 
@@ -753,6 +655,11 @@
             
         </div>
     </div> -->
+
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+        
+      </div>
+
 </div>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
