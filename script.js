@@ -64,11 +64,11 @@ function defaultsModel() {
     });
 
     self.addPreset = function(preset) {
-        this.presets.push(preset);
+        self.presets.push(preset);
     }
 
     self.clearPresets = function() {
-        this.presets.removeAll();
+        self.presets.removeAll();
     }
 }
 
