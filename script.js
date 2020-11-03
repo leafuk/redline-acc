@@ -60,7 +60,7 @@ function defaultsModel() {
     self.presets = ko.observableArray([]);
 
     self.hasPresets = ko.computed(function() {
-        return self.presets.count > 0;
+        return self.presets.length > 0;
     });
 
     self.addPreset = function(preset) {
