@@ -345,7 +345,7 @@ netlifyIdentity.on('login', user =>
 {
     console.log('login', user)
 
-    if(user == undefined || user == null)
+    if(user != undefined && user != null)
     {
         viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 1', 'btn-danger', redlineDivOneDefault));
         viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 2', 'btn-info', redlineDivTwoDefault));
