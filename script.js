@@ -66,6 +66,10 @@ function defaultsModel() {
     self.addPreset = function(preset) {
         this.presets.push(preset);
     }
+
+    self.clearPresets = function() {
+        this.presets.removeAll();
+    }
 }
 
 function presetModel(label, className, data) {
@@ -356,4 +360,11 @@ netlifyIdentity.on('login', user =>
         viewModel.defaults.addPreset(new presetModel('Wednesday GT4 ', 'btn-success', redlineGT4Default));
         viewModel.defaults.addPreset(new presetModel('Friday Endurance', 'btn-warning', redlineEnduranceDefault));
     }
+});
+
+netlifyIdentity.on('logout', () => 
+{
+    console.log('Logged out');
+
+    viewModel.default.clearPresets();
 });
