@@ -51,9 +51,9 @@ function myViewModel() {
 };
 
 function settingsModel() {
-    this.serverName = ko.observable('Redline Lobby 1');
-    this.password = ko.observable('rrl');
-    this.adminPassword = ko.observable('rrladmin');
+    this.serverName = ko.observable('');
+    this.password = ko.observable('');
+    this.adminPassword = ko.observable('');
     this.randomizeTrackWhenEmpty = ko.observable(0);
     this.trackMedalsRequirement = ko.numericObservable(3);
     this.safetyRatingRequirement = ko.numericObservable(-1);
