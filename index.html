@@ -26,59 +26,64 @@
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-      .jumbotron {
-            /* background-image: url('TCKzsLjuTQmw0ter4S8g9g.webp');
+        .navbar.bg-dark {
+            background-color: black !important;
+            margin-bottom: 1em;
+        }
+
+        .jumbotron {
+            background-image: url('TCKzsLjuTQmw0ter4S8g9g.webp');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat; */
+            background-repeat: no-repeat;
             color: white;
         }
 
-        .demo_wrap {
-            position: relative;
-            background: #5C97FF;
-            overflow: hidden;
+        [data-netlify-identity-button] a {
+            display: inline-block;
+            font-weight: 400;
+            color: #212529;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: transparent;
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         }
-        .demo_wrap h1, .demo_wrap p {
-            /* padding: 50px; */
-            position: relative;
-            z-index: 2;
+
+        [data-netlify-identity-button] a {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
-        /* You could use :after - it doesn't really matter */
-        .demo_wrap:before {
-            content: ' ';
-            display: block;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.6;
-            background-image: url('TCKzsLjuTQmw0ter4S8g9g.webp');
-            background-size: cover;
-            /* background-position: center; */
-            background-repeat: no-repeat;
-            background-position: center;
-            /* background-size: cover; */
+
+		[data-netlify-identity-button] a:hover,
+		[data-netlify-identity-button] a:focus {
+            color: #fff;
+            background-color: #c82333;
+            border-color: #bd2130;
+            text-decoration: none;
         }
 
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
-        }
-
-        .jumbotron {
-            padding: 1rem 2rem;
         }
       }
         
@@ -88,20 +93,18 @@
   </head>
   <body class="bg-light">
 
-    <div class="jumbotron demo_wrap">
-        <div class="container">
-          <h1 class="display-3">Redline Racing League</h1>
-          <p>ACC Configuration Wizard</p>
-          <!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p> -->
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand" href="#">
+                <img src="RRL_logo_short red white.png" width="100" height="43" class="d-inline-block align-top" alt="" loading="lazy">
+              </a>
+              <div data-netlify-identity-button class="float-right"></div>
+          
         </div>
       </div>
+    
 
     <div class="container">
-    <!-- <div class="py-5 text-center"> -->
-        <!-- <img class="d-block mx-auto mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
-        <!-- <h2>Assetto Corsa Competizione</h2>
-        <p class="lead">Configuration Wizard</p>
-    </div> -->
 
     <div class="row">
         <div class="col-md-3">
@@ -113,8 +116,8 @@
           </div>
 
         <hr class="mb-4">
-        <h5 class="mb-3">Presets</h5>
         <div class="presetsContainer" data-bind="using: defaults">
+            <h5 class="mb-3" data-bind="if: hasPresets">Presets</h5>
             <div data-bind="foreach: presets">
                 <button type="button" class="btn btn-block" data-bind="class: buttonStyle, click: $root.loadModel"><span data-bind="text: label"></span></button>
             </div>
@@ -125,12 +128,6 @@
         <button type="button" class="btn btn-danger btn-block" data-bind="click: loadModel.bind($data, redlineEnduranceDefault)">2Hr Endurance</button>
         <button type="button" class="btn btn-warning btn-block" data-bind="click: loadModel.bind($data, redlinePracticeRaceLobby1Default)">Lobby 1 Practice Race</button>
         <button type="button" class="btn btn-info btn-block" data-bind="click: loadModel.bind($data, redlinePracticeRaceLobby2Default)">Lobby 2 Practice Race</button> -->
-        <!-- <div data-netlify-identity-button>Login with Netlify Identity</div> -->
-        <!-- Add a menu:
-        Log in / Sign up - when the user is not logged in
-        Username / Log out - when the user is logged in
-        -->
-        <div data-netlify-identity-menu></div>
 
         <!-- <button type="button" class="btn btn-light btn-block">Block level button</button> -->
         <!-- <button type="button" class="btn btn-dark btn-block">Block level button</button> -->
