@@ -2,6 +2,7 @@ function myViewModel() {
     
     var self = this;
     self.settings = new settingsModel();
+    self.defaults = new defaultsModel();
 
     var eventSessions = [
         {
@@ -33,8 +34,11 @@ function myViewModel() {
     self.loadModel = function(data) {
         //var test = document.getElementById('t_test');
         //var data = JSON.parse(test.innerHTML);
+
+        console.log('login', data);
+
     
-         ko.mapping.fromJS(data, {}, self);
+         ko.mapping.fromJS(data.presetObject, {}, self);
          /* var viewModel = {};
             viewModel.model = ko.mapping.fromJS(data, {}, self);
                         self.updateFromModel(self, viewModel.model);*/
@@ -49,6 +53,28 @@ function myViewModel() {
     //     return ['France', 'Germany', 'Spain'];
     // }, this);
 };
+
+function defaultsModel() {
+    var self = this;
+
+    self.presets = ko.observableArray([]);
+
+    self.addPreset = function(preset) {
+        this.presets.push(preset);
+    }
+}
+
+function presetModel(label, className, data) {
+    var self = this;
+
+    self.label = ko.observable(label);
+    self.buttonStyle = ko.observable(className);
+    self.presetObject = data;
+
+    // self.loadModel = function(preset) {
+    //     $root.loadModel(preset.presetObject);
+    // }
+}
 
 function settingsModel() {
     this.serverName = ko.observable('');
@@ -315,4 +341,15 @@ var redlinePracticeRaceLobby2Default = {
     }
 };
 
-netlifyIdentity.on('login', user => console.log('login', user));
+netlifyIdentity.on('login', user => 
+{
+    console.log('login', user)
+
+    if(user == undefined || user == null)
+    {
+        viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 1', 'btn-danger', redlineDivOneDefault));
+        viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 2', 'btn-info', redlineDivTwoDefault));
+        viewModel.defaults.addPreset(new presetModel('Wednesday GT4 ', 'btn-success', redlineGT4Default));
+        viewModel.defaults.addPreset(new presetModel('Friday Endurance', 'btn-warning', redlineEnduranceDefault));
+    }
+});

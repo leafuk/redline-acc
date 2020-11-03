@@ -114,12 +114,17 @@
 
         <hr class="mb-4">
         <h5 class="mb-3">Presets</h5>
-        <button type="button" class="btn btn-primary btn-block" data-bind="click: loadModel.bind($data, redlineDivOneDefault)">Sunday Division 1 GT3</button>
+        <div class="presetsContainer" data-bind="using: defaults">
+            <div data-bind="foreach: presets">
+                <button type="button" class="btn btn-block" data-bind="class: buttonStyle, click: $root.loadModel"><span data-bind="text: label"></span></button>
+            </div>
+        </div>
+        <!-- <button type="button" class="btn btn-primary btn-block" data-bind="click: loadModel.bind($data, redlineDivOneDefault)">Sunday Division 1 GT3</button>
         <button type="button" class="btn btn-secondary btn-block" data-bind="click: loadModel.bind($data, redlineDivTwoDefault)">Sunday Division 2 GT3</button>
         <button type="button" class="btn btn-success btn-block" data-bind="click: loadModel.bind($data, redlineGT4Default)">Wednesday GT4</button>
         <button type="button" class="btn btn-danger btn-block" data-bind="click: loadModel.bind($data, redlineEnduranceDefault)">2Hr Endurance</button>
         <button type="button" class="btn btn-warning btn-block" data-bind="click: loadModel.bind($data, redlinePracticeRaceLobby1Default)">Lobby 1 Practice Race</button>
-        <button type="button" class="btn btn-info btn-block" data-bind="click: loadModel.bind($data, redlinePracticeRaceLobby2Default)">Lobby 2 Practice Race</button>
+        <button type="button" class="btn btn-info btn-block" data-bind="click: loadModel.bind($data, redlinePracticeRaceLobby2Default)">Lobby 2 Practice Race</button> -->
         <!-- <div data-netlify-identity-button>Login with Netlify Identity</div> -->
         <!-- Add a menu:
         Log in / Sign up - when the user is not logged in
