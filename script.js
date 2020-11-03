@@ -314,3 +314,5 @@ var redlinePracticeRaceLobby2Default = {
         track: "mount_panorama_2019"
     }
 };
+
+netlifyIdentity.on('login', user => console.log('login', user));
