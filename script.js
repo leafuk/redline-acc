@@ -4,31 +4,31 @@ function myViewModel() {
     self.settings = new settingsModel();
     self.defaults = new defaultsModel();
 
-    var eventSessions = [
-        {
-            "hourOfDay": 10,
-            "dayOfWeekend": 1,
-            "sessionType": "P",
-            "sessionDurationMinutes": 120,
-            "timeMultiplier": 4
-        },
-        {
-            "hourOfDay": 12,
-            "dayOfWeekend": 2,
-            "sessionType": "Q",
-            "sessionDurationMinutes": 15,
-            "timeMultiplier": 4
-        },
-        {
-            "hourOfDay": 14,
-            "dayOfWeekend": 3,
-            "sessionType": "R",
-            "sessionDurationMinutes": 60,
-            "timeMultiplier": 4
-        }
-    ];
+    // var eventSessions = [
+    //     {
+    //         "hourOfDay": 10,
+    //         "dayOfWeekend": 1,
+    //         "sessionType": "P",
+    //         "sessionDurationMinutes": 120,
+    //         "timeMultiplier": 4
+    //     },
+    //     {
+    //         "hourOfDay": 12,
+    //         "dayOfWeekend": 2,
+    //         "sessionType": "Q",
+    //         "sessionDurationMinutes": 15,
+    //         "timeMultiplier": 4
+    //     },
+    //     {
+    //         "hourOfDay": 14,
+    //         "dayOfWeekend": 3,
+    //         "sessionType": "R",
+    //         "sessionDurationMinutes": 60,
+    //         "timeMultiplier": 4
+    //     }
+    // ];
 
-    self.event = new eventModel(eventSessions);
+    self.event = new eventModel();
     self.eventRules = new eventRulesModel();
 
     self.loadModel = function(data) {
@@ -126,7 +126,7 @@ function eventModel(sessions) {
 
     self.weatherRandomness = ko.numericObservable(2);
 
-    self.sessions = ko.mapping.fromJS(sessions);
+    self.sessions = new ko.observableArray(); //ko.mapping.fromJS(sessions);
     self.configVersion = ko.numericObservable(1);
 
     self.availableTracks = ko.observableArray([
@@ -245,11 +245,11 @@ function sessionModel() {
     var self = this;
     
     self.sessionType = ko.observable('Q');
-    self.dayOfWeekend = ko.numericObservable(0);
-    self.hourOfDay = ko.numericObservable(0);
+    self.dayOfWeekend = ko.numericObservable(2);
+    self.hourOfDay = ko.numericObservable(12);
 
-    self.sessionDurationMinutes = ko.numericObservable(0);
-    self.timeMultiplier = ko.numericObservable(0);
+    self.sessionDurationMinutes = ko.numericObservable(5);
+    self.timeMultiplier = ko.numericObservable(4);
 }
 
 var mapping = {
