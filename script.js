@@ -288,8 +288,24 @@ ko.applyBindings(viewModel);
 
 var redlineDivOneDefault = {
     settings: {
-        serverName: "Redline Sunday Div 1"
-    },
+        "serverName": "Redline Racing League - Sunday Div 1 GT3",
+        "password": "rrl",
+        "adminPassword": "",
+        "randomizeTrackWhenEmpty": 0,
+        "trackMedalsRequirement": 0,
+        "safetyRatingRequirement": -1,
+        "racecraftRatingRequirement": -1,
+        "allowAutoDQ": -1,
+        "spectatorSlots": 0,
+        "spectatorPassword": "",
+        "dumpLeaderboards": 0,
+        "isCPServer": 0,
+        "competitionRatingMin": -1,
+        "competitionRatingMax": -1,
+        "configVersion": 1,
+        "isRaceLocked": 0,
+        "region": "EU"
+      },
     event: {
         sessions: [
             {
