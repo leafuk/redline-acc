@@ -323,7 +323,7 @@ var redlineDivOneDefault = {
             "hourOfDay": 12,
             "dayOfWeekend": 1,
             "sessionType": "P",
-            "sessionDurationMinutes": "60",
+            "sessionDurationMinutes": 60,
             "timeMultiplier": 2
           },
           {
