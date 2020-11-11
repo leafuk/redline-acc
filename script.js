@@ -346,7 +346,7 @@ var redlineDivOneDefault = {
     eventRules: {
         "qualifyStandingType": 1,
         "superpoleMaxCar": -1,
-        "pitWindowLengthSec": 40,
+        "pitWindowLengthSec": 2400,
         "mandatoryPitstopCount": 1,
         "maxTotalDrivingTime": -1,
         "driverStintTimeSec": -1,
