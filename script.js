@@ -318,26 +318,26 @@ var redlineDivOneDefault = {
         "cloudLevel": 0.3,
         "rain": 0,
         "weatherRandomness": 2,
-        "sessions": [
+        sessions: [
           {
             "hourOfDay": 12,
             "dayOfWeekend": 1,
             "sessionType": "P",
-            "sessionDurationMinutes": 60,
+            sessionDurationMinutes: 60,
             "timeMultiplier": 2
           },
           {
             "sessionType": "Q",
             "dayOfWeekend": 2,
             "hourOfDay": 14,
-            "sessionDurationMinutes": 15,
+            sessionDurationMinutes: 15,
             "timeMultiplier": 2
           },
           {
             "sessionType": "R",
             "dayOfWeekend": 3,
             "hourOfDay": 12,
-            "sessionDurationMinutes": 60,
+            sessionDurationMinutes: 60,
             "timeMultiplier": 2
           }
         ],
