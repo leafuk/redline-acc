@@ -307,16 +307,56 @@ var redlineDivOneDefault = {
         "region": "EU"
       },
     event: {
-        sessions: [
-            {
-                "hourOfDay": 12,
-                "dayOfWeekend": 2,
-                "sessionType": "Q",
-                "sessionDurationMinutes": 5,
-                "timeMultiplier": 24
-            }
+        "track": "suzuka_2019",
+        "carGroup": "GT3",
+        "preRaceWaitingTimeSeconds": 180,
+        "sessionOverTimeSeconds": 180,
+        "postQualySeconds": 30,
+        "postRaceSeconds": 120,
+        "ambientTemp": 26,
+        "trackTemp": 30,
+        "cloudLevel": 0.3,
+        "rain": 0,
+        "weatherRandomness": 2,
+        "sessions": [
+          {
+            "hourOfDay": 12,
+            "dayOfWeekend": 1,
+            "sessionType": "P",
+            "sessionDurationMinutes": "60",
+            "timeMultiplier": 2
+          },
+          {
+            "sessionType": "Q",
+            "dayOfWeekend": 2,
+            "hourOfDay": 14,
+            "sessionDurationMinutes": 15,
+            "timeMultiplier": 2
+          },
+          {
+            "sessionType": "R",
+            "dayOfWeekend": 3,
+            "hourOfDay": 12,
+            "sessionDurationMinutes": 60,
+            "timeMultiplier": 2
+          }
         ],
-        track: "spa"
+        "configVersion": 1
+    },
+    eventRules: {
+        "qualifyStandingType": 1,
+        "superpoleMaxCar": -1,
+        "pitWindowLengthSec": 40,
+        "mandatoryPitstopCount": 1,
+        "maxTotalDrivingTime": -1,
+        "driverStintTimeSec": -1,
+        "maxDriversCount": 1,
+        "isRefuellingAllowedInRace": true,
+        "isRefuellingTimeFixed": true,
+        "isMandatoryPitstopRefuellingRequired": false,
+        "isMandatoryPitstopTyreChangeRequired": true,
+        "isMandatoryPitstopSwapDriverRequired": false,
+        "tyreSetCount": 50
     }
 };
 
