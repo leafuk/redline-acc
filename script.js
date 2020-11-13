@@ -320,25 +320,25 @@ var redlineDivOneDefault = {
         "weatherRandomness": 2,
         sessions: [
           {
-            "hourOfDay": 12,
-            "dayOfWeekend": 1,
-            "sessionType": "P",
+            hourOfDay: 12,
+            dayOfWeekend: 1,
+            sessionType: "P",
             sessionDurationMinutes: 60,
-            "timeMultiplier": 2
+            timeMultiplier: 2
           },
           {
-            "sessionType": "Q",
-            "dayOfWeekend": 2,
-            "hourOfDay": 14,
+            sessionType: "Q",
+            dayOfWeekend: 2,
+            hourOfDay: 14,
             sessionDurationMinutes: 15,
-            "timeMultiplier": 2
+            timeMultiplier: 2
           },
           {
-            "sessionType": "R",
-            "dayOfWeekend": 3,
-            "hourOfDay": 12,
-            sessionDurationMinutes: 60,
-            "timeMultiplier": 2
+            sessionType: "R",
+            dayOfWeekend: 3,
+            hourOfDay: 12,
+            essionDurationMinutes: 60,
+            timeMultiplier: 2
           }
         ],
         "configVersion": 1
