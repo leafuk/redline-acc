@@ -109,178 +109,107 @@
 
     <div class="row">
         <div class="col-md-3">
-          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="true">Settings</a>
-            <a class="nav-link" id="v-pills-event-tab" data-toggle="pill" href="#v-pills-event" role="tab" aria-controls="v-pills-event" aria-selected="false">Event</a>
-            <a class="nav-link" id="v-pills-eventRules-tab" data-toggle="pill" href="#v-pills-eventRules" role="tab" aria-controls="v-pills-eventRules" aria-selected="false">Event Rules</a>
-            <!-- <a class="nav-link" id="v-pills-custom-tab" data-toggle="pill" href="#v-pills-custom" role="tab" aria-controls="v-pills-custom" aria-selected="false">Custom</a> -->
-          </div>
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="true">Settings</a>
+                <a class="nav-link" id="v-pills-event-tab" data-toggle="pill" href="#v-pills-event" role="tab" aria-controls="v-pills-event" aria-selected="false">Event</a>
+                <a class="nav-link" id="v-pills-eventRules-tab" data-toggle="pill" href="#v-pills-eventRules" role="tab" aria-controls="v-pills-eventRules" aria-selected="false">Event Rules</a>
+            </div>
 
-        <hr class="mb-4">
-        <div class="presetsContainer" data-bind="using: defaults">
-            <h5 class="mb-3" data-bind="if: hasPresets">Presets</h5>
-            <div data-bind="foreach: presets">
-                <button type="button" class="btn btn-block" data-bind="class: buttonStyle, click: $root.loadModel"><span data-bind="text: label"></span></button>
+            <hr class="mb-4">
+            <div class="presetsContainer" data-bind="using: defaults">
+                <h5 class="mb-3" data-bind="if: hasPresets">Presets</h5>
+                <div data-bind="foreach: presets">
+                    <button type="button" class="btn btn-block" data-bind="class: buttonStyle, click: $root.loadModel"><span data-bind="text: label"></span></button>
+                </div>
             </div>
         </div>
-        <!-- <button type="button" class="btn btn-primary btn-block" data-bind="click: loadModel.bind($data, redlineDivOneDefault)">Sunday Division 1 GT3</button>
-        <button type="button" class="btn btn-secondary btn-block" data-bind="click: loadModel.bind($data, redlineDivTwoDefault)">Sunday Division 2 GT3</button>
-        <button type="button" class="btn btn-success btn-block" data-bind="click: loadModel.bind($data, redlineGT4Default)">Wednesday GT4</button>
-        <button type="button" class="btn btn-danger btn-block" data-bind="click: loadModel.bind($data, redlineEnduranceDefault)">2Hr Endurance</button>
-        <button type="button" class="btn btn-warning btn-block" data-bind="click: loadModel.bind($data, redlinePracticeRaceLobby1Default)">Lobby 1 Practice Race</button>
-        <button type="button" class="btn btn-info btn-block" data-bind="click: loadModel.bind($data, redlinePracticeRaceLobby2Default)">Lobby 2 Practice Race</button> -->
 
-        <!-- <button type="button" class="btn btn-light btn-block">Block level button</button> -->
-        <!-- <button type="button" class="btn btn-dark btn-block">Block level button</button> -->
-          <!-- <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-action btn-primary" data-bind="click: loadModel.bind($data, redlineDivOneDefault)">Sunday Division 1 GT3</button>
-            <button type="button" class="list-group-item list-group-item-action" data-bind="click: loadModel.bind($data, redlineDivTwoDefault)">Sunday Division 2 GT3</button>
-            <button type="button" class="list-group-item list-group-item-action" data-bind="click: loadModel.bind($data, redlineGT4Default)">Wednesday GT4</button>
-            <button type="button" class="list-group-item list-group-item-action" data-bind="click: loadModel.bind($data, redlineEnduranceDefault)">2Hr Endurance</button>
-          </div> -->
-        </div>
-        <div class="col-md-9">
+
+        <div class="col-md-9" data-bind="using: config">
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                 
-                <!-- <div class="row"> -->
-        
-                    <!-- <div class="col-md-4 order-md-2 mb-4">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted">Your cart</span>
-                        <span class="badge badge-secondary badge-pill">3</span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Product name</h6>
-                            <small class="text-muted">Brief description</small>
+                <h4 class="mb-3">Settings</h4>
+                
+                <form id="settings-form" class="needs-validation" novalidate data-bind="using: settings">
+    
+                    <div class="mb-3">
+                        <label for="serverName">Server name</label>
+                        <input type="text" data-bind="textInput: serverName" class="form-control" id="serverName" placeholder="Server Name" required>
+                        <small class="text-muted">The server name displayed in the ACC UI pages</small>
+                        <div class="invalid-feedback">
+                            Valid first name is required.
                         </div>
-                        <span class="text-muted">$12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Second product</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Third item</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <span class="text-muted">$5</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                        <div class="text-success">
-                            <h6 class="my-0">Promo code</h6>
-                            <small>EXAMPLECODE</small>
-                        </div>
-                        <span class="text-success">-$5</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
-                        <strong>$20</strong>
-                        </li>
-                    </ul>
-            
-                    <form class="card p-2">
-                        <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Promo code">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-secondary">Redeem</button>
-                        </div>
-                        </div>
-                    </form>
-                    </div> -->
-            
-                    <!-- <div class="col-md-8 order-md-1"> -->
-                        <h4 class="mb-3">Settings</h4>
-                        
-                        <form class="needs-validation" novalidate data-bind="using: settings">
-            
-                            <div class="mb-3">
-                                <label for="serverName">Server name</label>
-                                <input type="text" data-bind="textInput: serverName" class="form-control" id="serverName" placeholder="Server Name" required>
-                                <small class="text-muted">The server name displayed in the ACC UI pages</small>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="password">Lobby Password</label>
+                            <input type="text" data-bind="textInput: password" class="form-control" id="password" placeholder="Password" required>
+                            <small class="text-muted">Password required to enter this server. If a password is set, the server is declared “Private Multiplayer”.</small>
+                            <div class="invalid-feedback">
+                                Valid password is required.
                             </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="password">Lobby Password</label>
-                                    <input type="text" data-bind="textInput: password" class="form-control" id="password" placeholder="Password" required>
-                                    <small class="text-muted">Password required to enter this server. If a password is set, the server is declared “Private Multiplayer”.</small>
-                                    <div class="invalid-feedback">
-                                        Valid password is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                    <label for="adminPassword">Admin Password</label>
-                                    <input type="text" data-bind="textInput: adminPassword" class="form-control" id="adminPassword" placeholder="Admin Password" required>
-                                    <small class="text-muted">Password to elevate via “Server admin commands”</small>
-                                    <div class="invalid-feedback">
-                                        Valid password is required.
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="password">Track Medals Requirement</label>
-                                    <select data-bind="value: trackMedalsRequirement, options: availabletrackMedalsRequirement" class="form-control">
-                                    </select>
-                                    <small class="text-muted">Defines the amount of track medals that a user has to have for the given track</small>
-                                </div> 
-            
-                                <div class="col-md-6 mb-3">
-                                    <label for="safetyRatingRequirement">Safety Rating Requirement</label>
-                                    <input type="number" data-bind="textInput: safetyRatingRequirement" class="form-control" id="safetyRatingRequirement" placeholder="0" min="-1" max="99" required>
-                                    <small class="text-muted">Defines the Safety Rating (SA) that a user must have to join this server. Set value of -1 to disable</small>
-                                    <div class="invalid-feedback">
-                                        Valid password is required.
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <div class="d-block my-3">
-                                <label for="adminPassword">Randomize Track When Empty</label>
-                                    <div class="custom-control custom-radio">
-                                    <input id="randomizeTrackWhenEmptyYes" name="randomizeTrackWhenEmpty" type="radio" class="custom-control-input" data-bind = "checked: randomizeTrackWhenEmpty, checkedValue: 1" required>
-                                    <label class="custom-control-label" for="randomizeTrackWhenEmptyYes">Yes</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="randomizeTrackWhenEmptyNo" name="randomizeTrackWhenEmpty" type="radio" class="custom-control-input" data-bind = "checked: randomizeTrackWhenEmpty, checkedValue: 0" required>
-                                    <label class="custom-control-label" for="randomizeTrackWhenEmptyNo">No</label>
-                                </div>  
-                                <small class="text-muted">If set to 1, the server will change to a random track when the last drivers leaves ( which causes a reset to FP1 ). The “track” property will only define the default state for the first session.</small>
-                            </div>
-                        </form>
-
-                        <hr class="mb-4">
-
-                        <div style="position: relative; min-height: 200px;">
-                            <button class="btn btn-info float-right copy-settings-btn">Copy</button>
-                            <div class="toast" style="position: absolute; top: 0px; right: 80px;">
-                                <div class="toast-body">
-                                  Config copied to clipboard.
-                                </div>
-                              </div>
-                            <pre class="text-muted settings-json" data-bind="text: JSON.stringify(ko.mapping.toJS($root.settings, mapping), null, 2);"></pre>
                         </div>
-                        
 
-                    <!-- </div> -->
-                <!-- </div> -->
+                        <div class="col-md-6 mb-3">
+                            <label for="adminPassword">Admin Password</label>
+                            <input type="text" data-bind="textInput: adminPassword" class="form-control" id="adminPassword" placeholder="Admin Password" required>
+                            <small class="text-muted">Password to elevate via “Server admin commands”</small>
+                            <div class="invalid-feedback">
+                                Valid password is required.
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="password">Track Medals Requirement</label>
+                            <select data-bind="value: trackMedalsRequirement, options: availabletrackMedalsRequirement" class="form-control">
+                            </select>
+                            <small class="text-muted">Defines the amount of track medals that a user has to have for the given track</small>
+                        </div> 
+    
+                        <div class="col-md-6 mb-3">
+                            <label for="safetyRatingRequirement">Safety Rating Requirement</label>
+                            <input type="number" data-bind="textInput: safetyRatingRequirement" class="form-control" id="safetyRatingRequirement" placeholder="0" min="-1" max="99" required>
+                            <small class="text-muted">Defines the Safety Rating (SA) that a user must have to join this server. Set value of -1 to disable</small>
+                            <div class="invalid-feedback">
+                                Valid password is required.
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="d-block my-3">
+                        <label for="adminPassword">Randomize Track When Empty</label>
+                            <div class="custom-control custom-radio">
+                            <input id="randomizeTrackWhenEmptyYes" name="randomizeTrackWhenEmpty" type="radio" class="custom-control-input" data-bind = "checked: randomizeTrackWhenEmpty, checkedValue: 1" required>
+                            <label class="custom-control-label" for="randomizeTrackWhenEmptyYes">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="randomizeTrackWhenEmptyNo" name="randomizeTrackWhenEmpty" type="radio" class="custom-control-input" data-bind = "checked: randomizeTrackWhenEmpty, checkedValue: 0" required>
+                            <label class="custom-control-label" for="randomizeTrackWhenEmptyNo">No</label>
+                        </div>  
+                        <small class="text-muted">If set to 1, the server will change to a random track when the last drivers leaves ( which causes a reset to FP1 ). The “track” property will only define the default state for the first session.</small>
+                    </div>
+                </form>
 
+                <hr class="mb-4">
+
+                <div style="position: relative; min-height: 200px;">
+                    <button class="btn btn-info float-right copy-settings-btn">Copy</button>
+                    <div class="toast" style="position: absolute; top: 0px; right: 80px;">
+                        <div class="toast-body">
+                            Config copied to clipboard.
+                        </div>
+                        </div>
+                    <pre class="text-muted settings-json" data-bind="text: JSON.stringify(ko.mapping.toJS($root.config.settings, mapping), null, 2);"></pre>
+                </div>
             </div>
 
+
             <div class="tab-pane fade" id="v-pills-event" role="tabpanel" aria-labelledby="v-pills-event-tab">
-                <h4 class="mb-3">Event</h4>
+                <h4 class="mb-3">Event <br/><small class="text-muted" data-bind="text: $root.config.settings.serverName"></small></h4>
             
                 <form class="needs-validation" novalidate data-bind="using: event">
 
@@ -479,8 +408,8 @@
                                 <div class="row" >
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="sessionDurationMinutes">Session Duration</label>
-                                        <input type="number" data-bind="textInput: sessionDurationMinutes" class="form-control" id="sessionDurationMinutes" placeholder="0" min="0" max="1440" required>
+                                        <label>Session Duration</label>
+                                        <input type="number" data-bind="value: sessionDurationMinutes" class="form-control" placeholder="0" min="0" max="1440" required>
                                         <small class="text-muted">Session duration in minutes</small>
                                     </div>  
 
@@ -496,7 +425,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary" data-bind="click: addSession">Add new session</button>
+                    <button class="btn btn-primary" data-bind="click: newSession">Add new session</button>
 
                 </form>
 
@@ -509,13 +438,13 @@
                             Config copied to clipboard.
                         </div>
                     </div>
-                    <pre class="text-muted event-json" data-bind="text: JSON.stringify(ko.mapping.toJS($root.event, mapping), null, 2);"></pre>
+                    <pre class="text-muted event-json" data-bind="text: JSON.stringify(ko.mapping.toJS($root.config.event, mapping), null, 2);"></pre>
                 </div>
 
             </div>
 
             <div class="tab-pane fade" id="v-pills-eventRules" role="tabpanel" aria-labelledby="v-pills-eventRules-tab">
-                <h4 class="mb-3">Event Rules</h4>
+                <h4 class="mb-3">Event Rules <br/><small class="text-muted" data-bind="text: $root.config.settings.serverName"></small></h4>
             
                 <form class="needs-validation" novalidate data-bind="using: eventRules">
 
@@ -630,7 +559,7 @@
                           Config copied to clipboard.
                         </div>
                       </div>
-                    <pre class="text-muted eventrules-json" data-bind="text: JSON.stringify(ko.mapping.toJS($root.eventRules, mapping), null, 2);"></pre>
+                    <pre class="text-muted eventrules-json" data-bind="text: JSON.stringify(ko.mapping.toJS($root.config.eventRules, mapping), null, 2);"></pre>
                 </div>
 
             </div>

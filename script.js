@@ -1,58 +1,27 @@
 function myViewModel() {
-    
     var self = this;
-    self.settings = new settingsModel();
+
     self.defaults = new defaultsModel();
+    self.config = new configModel();
 
-    // var eventSessions = [
-    //     {
-    //         "hourOfDay": 10,
-    //         "dayOfWeekend": 1,
-    //         "sessionType": "P",
-    //         "sessionDurationMinutes": 120,
-    //         "timeMultiplier": 4
-    //     },
-    //     {
-    //         "hourOfDay": 12,
-    //         "dayOfWeekend": 2,
-    //         "sessionType": "Q",
-    //         "sessionDurationMinutes": 15,
-    //         "timeMultiplier": 4
-    //     },
-    //     {
-    //         "hourOfDay": 14,
-    //         "dayOfWeekend": 3,
-    //         "sessionType": "R",
-    //         "sessionDurationMinutes": 60,
-    //         "timeMultiplier": 4
-    //     }
-    // ];
+    self.loadModel = function(data) {
+        self.config.load(data.presetObject);
+    };
+};
 
+function configModel() {
+    var self = this;
+
+    self.settings = new settingsModel();
     self.event = new eventModel();
     self.eventRules = new eventRulesModel();
 
-    self.loadModel = function(data) {
-        //var test = document.getElementById('t_test');
-        //var data = JSON.parse(test.innerHTML);
-
-        console.log('login', data);
-
-    
-         ko.mapping.fromJS(data.presetObject, {}, self);
-         /* var viewModel = {};
-            viewModel.model = ko.mapping.fromJS(data, {}, self);
-                        self.updateFromModel(self, viewModel.model);*/
-     };
-
-
-    // this.toJsonModel = ko.computed(function() {
-    //     return ko.toJS(this);
-    // }, this);
-
-    // this.circuits = ko.computed(function() {
-    //     return ['France', 'Germany', 'Spain'];
-    // }, this);
-};
+    self.load = function(data) {
+        self.settings.load(data.settings);
+        self.event.load(data.event);
+        self.eventRules.load(data.eventRules);
+    }
+}   
 
 function defaultsModel() {
     var self = this;
@@ -78,35 +47,52 @@ function presetModel(label, className, data) {
     self.label = ko.observable(label);
     self.buttonStyle = ko.observable(className);
     self.presetObject = data;
-
-    // self.loadModel = function(preset) {
-    //     $root.loadModel(preset.presetObject);
-    // }
 }
 
-function settingsModel() {
-    this.serverName = ko.observable('');
-    this.password = ko.observable('');
-    this.adminPassword = ko.observable('');
-    this.randomizeTrackWhenEmpty = ko.observable(0);
-    this.trackMedalsRequirement = ko.numericObservable(3);
-    this.safetyRatingRequirement = ko.numericObservable(-1);
-    this.racecraftRatingRequirement = ko.numericObservable(-1);
-    this.allowAutoDQ = ko.observable(-1);
-    this.spectatorSlots = ko.numericObservable(0);
-    this.spectatorPassword = ko.observable('');
-    this.dumpLeaderboards = ko.observable(0);
-    this.isCPServer = ko.observable(0);
-    this.competitionRatingMin = ko.numericObservable(-1);
-    this.competitionRatingMax = ko.numericObservable(-1);
-    this.configVersion = ko.observable(1);
-    this.isRaceLocked = ko.observable(0);
-    this.region = ko.observable('EU');
+function settingsModel(settingsData) {
+    var self = this;
 
-    this.availabletrackMedalsRequirement = ko.observableArray([0, 1, 2, 3]);
+    self.serverName = ko.observable('');
+    self.password = ko.observable('');
+    self.adminPassword = ko.observable('');
+    self.randomizeTrackWhenEmpty = ko.observable(0);
+    self.trackMedalsRequirement = ko.numericObservable(3);
+    self.safetyRatingRequirement = ko.numericObservable(-1);
+    self.racecraftRatingRequirement = ko.numericObservable(-1);
+    self.allowAutoDQ = ko.observable(-1);
+    self.spectatorSlots = ko.numericObservable(0);
+    self.spectatorPassword = ko.observable('');
+    self.dumpLeaderboards = ko.observable(0);
+    self.isCPServer = ko.observable(0);
+    self.competitionRatingMin = ko.numericObservable(-1);
+    self.competitionRatingMax = ko.numericObservable(-1);
+    self.configVersion = ko.observable(1);
+    self.isRaceLocked = ko.observable(0);
+    self.region = ko.observable('EU');
+
+    self.availabletrackMedalsRequirement = ko.observableArray([0, 1, 2, 3]);
+
+    self.load = function(settingsData) {
+        self.serverName(settingsData.serverName);
+        self.password(settingsData.password);
+        self.randomizeTrackWhenEmpty(settingsData.randomizeTrackWhenEmpty);
+        self.trackMedalsRequirement(settingsData.trackMedalsRequirement);
+        self.safetyRatingRequirement(settingsData.safetyRatingRequirement);
+        self.racecraftRatingRequirement(settingsData.racecraftRatingRequirement);
+        self.allowAutoDQ(settingsData.allowAutoDQ);
+        self.spectatorSlots(settingsData.spectatorSlots);
+        self.spectatorPassword(settingsData.spectatorPassword);
+        self.dumpLeaderboards(settingsData.dumpLeaderboards);
+        self.isCPServer(settingsData.isCPServer);
+        self.competitionRatingMin(settingsData.competitionRatingMin);
+        self.competitionRatingMax(settingsData.competitionRatingMax);
+        self.configVersion(settingsData.configVersion);
+        self.isRaceLocked(settingsData.isRaceLocked);
+        self.region(settingsData.region);
+    };
 }
 
-function eventModel(sessions) {
+function eventModel(data) {
     var self = this;
 
     self.track = ko.observable('silverstone');
@@ -126,7 +112,8 @@ function eventModel(sessions) {
 
     self.weatherRandomness = ko.numericObservable(2);
 
-    self.sessions = new ko.observableArray(); //ko.mapping.fromJS(sessions);
+    self.sessions = ko.observableArray(); //ko.mapping.fromJS(sessions);
+
     self.configVersion = ko.numericObservable(1);
 
     self.availableTracks = ko.observableArray([
@@ -198,13 +185,48 @@ function eventModel(sessions) {
         { name: 'More Sensational - 7', id: 7 },
     ]);
 
-    self.addSession = function() {
-        this.sessions.push(new sessionModel());
+    self.addSession = function(sessionData) {
+        this.sessions.push(new sessionModel(sessionData));
+    }
+
+    self.newSession = function() {
+        this.sessions.push(new sessionModel(null));
     }
     
     self.removeSession = function() {
         self.sessions.remove(this);
     }
+
+    self.load = function(eventData) {
+        self.track(eventData.track);
+        self.carGroup(eventData.carGroup);
+        self.preRaceWaitingTimeSeconds(eventData.preRaceWaitingTimeSeconds);
+        self.sessionOverTimeSeconds(eventData.sessionOverTimeSeconds);
+        self.postQualySeconds(eventData.postQualySeconds);
+        self.postRaceSeconds(eventData.postRaceSeconds);
+        self.ambientTemp(eventData.ambientTemp);
+        self.trackTemp(eventData.trackTemp);
+        self.cloudLevel(eventData.cloudLevel);
+        self.rain(eventData.rain);
+        self.weatherRandomness(eventData.weatherRandomness);
+        self.configVersion(eventData.configVersion);
+
+        self.sessions([]);
+        eventData.sessions.forEach(session => {
+            self.addSession(session);
+        });
+    };
+}
+
+function sessionModel(data) {
+    var self = this;
+    
+    self.sessionType = ko.observable(data ? data.sessionType : 'P');
+    self.dayOfWeekend = ko.numericObservable(data ? data.dayOfWeekend : 1);
+    self.hourOfDay = ko.numericObservable(data ? data.hourOfDay : 12);
+
+    self.sessionDurationMinutes = ko.numericObservable(data ? data.sessionDurationMinutes : 20);
+    self.timeMultiplier = ko.numericObservable(data ? data.timeMultiplier : 2);
 }
 
 function eventRulesModel() {
@@ -229,6 +251,22 @@ function eventRulesModel() {
     self.isMandatoryPitstopSwapDriverRequired = ko.observable(false);
 
     self.tyreSetCount = ko.numericObservable(50);
+
+    self.load = function(eventRulesData) {
+        self.qualifyStandingType(eventRulesData.qualifyStandingType);
+        self.superpoleMaxCar(eventRulesData.superpoleMaxCar);
+        self.pitWindowLengthSec(eventRulesData.pitWindowLengthSec);
+        self.mandatoryPitstopCount(eventRulesData.mandatoryPitstopCount);
+        self.maxTotalDrivingTime(eventRulesData.maxTotalDrivingTime);
+        self.driverStintTimeSec(eventRulesData.driverStintTimeSec);
+        self.maxDriversCount(eventRulesData.maxDriversCount);
+        self.isRefuellingAllowedInRace(eventRulesData.isRefuellingAllowedInRace);
+        self.isRefuellingTimeFixed(eventRulesData.isRefuellingTimeFixed);
+        self.isMandatoryPitstopRefuellingRequired(eventRulesData.isMandatoryPitstopRefuellingRequired);
+        self.isMandatoryPitstopTyreChangeRequired(eventRulesData.isMandatoryPitstopTyreChangeRequired);
+        self.isMandatoryPitstopSwapDriverRequired(eventRulesData.isMandatoryPitstopSwapDriverRequired);
+        self.tyreSetCount(eventRulesData.tyreSetCount);
+    };
 }
 
 function Group(label, children) {
@@ -239,17 +277,6 @@ function Group(label, children) {
 function Option(label, value) {
     this.label = ko.observable(label);
     this.value = ko.observable(value);
-}
-
-function sessionModel() {
-    var self = this;
-    
-    self.sessionType = ko.observable('Q');
-    self.dayOfWeekend = ko.numericObservable(2);
-    self.hourOfDay = ko.numericObservable(12);
-
-    self.sessionDurationMinutes = ko.numericObservable(5);
-    self.timeMultiplier = ko.numericObservable(4);
 }
 
 var mapping = {
@@ -264,6 +291,10 @@ var mapping = {
         "availableWeatherRandomness",
         "availableCarGroup",
     ]
+}
+
+function rawNumber(val) {
+    return Number(val.toString().replace(/[^\d\.\-]/g, ''));
 }
 
 ko.numericObservable = function(initialValue) {
@@ -288,42 +319,42 @@ ko.applyBindings(viewModel);
 
 var redlineDivOneDefault = {
     settings: {
-        "serverName": "Redline Racing League - Sunday Div 1 GT3",
-        "password": "rrl",
-        "adminPassword": "",
-        "randomizeTrackWhenEmpty": 0,
-        "trackMedalsRequirement": 0,
-        "safetyRatingRequirement": -1,
-        "racecraftRatingRequirement": -1,
-        "allowAutoDQ": -1,
-        "spectatorSlots": 0,
-        "spectatorPassword": "",
-        "dumpLeaderboards": 0,
-        "isCPServer": 0,
-        "competitionRatingMin": -1,
-        "competitionRatingMax": -1,
-        "configVersion": 1,
-        "isRaceLocked": 0,
-        "region": "EU"
+        serverName: "Redline Racing League - Sunday Div 1 GT3",
+        password: "rrl",
+        adminPassword: "",
+        randomizeTrackWhenEmpty: 0,
+        trackMedalsRequirement: 0,
+        safetyRatingRequirement: -1,
+        racecraftRatingRequirement: -1,
+        allowAutoDQ: -1,
+        spectatorSlots: 0,
+        spectatorPassword: "",
+        dumpLeaderboards: 0,
+        isCPServer: 0,
+        competitionRatingMin: -1,
+        competitionRatingMax: -1,
+        configVersion: 1,
+        isRaceLocked: 0,
+        region: "EU"
       },
     event: {
-        "track": "suzuka_2019",
-        "carGroup": "GT3",
-        "preRaceWaitingTimeSeconds": 180,
-        "sessionOverTimeSeconds": 180,
-        "postQualySeconds": 30,
-        "postRaceSeconds": 120,
-        "ambientTemp": 26,
-        "trackTemp": 30,
-        "cloudLevel": 0.3,
-        "rain": 0,
-        "weatherRandomness": 2,
+        track: "suzuka_2019",
+        carGroup: "GT3",
+        preRaceWaitingTimeSeconds: 180,
+        sessionOverTimeSeconds: 180,
+        postQualySeconds: 30,
+        postRaceSeconds: 120,
+        ambientTemp: 26,
+        trackTemp: 30,
+        cloudLevel: 0.3,
+        rain: 0,
+        weatherRandomness: 2,
         sessions: [
           {
             hourOfDay: 12,
             dayOfWeekend: 1,
             sessionType: "P",
-            sessionDurationMinutes: 60,
+            sessionDurationMinutes: 120,
             timeMultiplier: 2
           },
           {
@@ -336,54 +367,263 @@ var redlineDivOneDefault = {
           {
             sessionType: "R",
             dayOfWeekend: 3,
-            hourOfDay: 12,
-            essionDurationMinutes: 60,
+            hourOfDay: 14,
+            sessionDurationMinutes: 60,
             timeMultiplier: 2
           }
         ],
-        "configVersion": 1
+        configVersion: 1
     },
     eventRules: {
-        "qualifyStandingType": 1,
-        "superpoleMaxCar": -1,
-        "pitWindowLengthSec": 2400,
-        "mandatoryPitstopCount": 1,
-        "maxTotalDrivingTime": -1,
-        "driverStintTimeSec": -1,
-        "maxDriversCount": 1,
-        "isRefuellingAllowedInRace": true,
-        "isRefuellingTimeFixed": true,
-        "isMandatoryPitstopRefuellingRequired": false,
-        "isMandatoryPitstopTyreChangeRequired": true,
-        "isMandatoryPitstopSwapDriverRequired": false,
-        "tyreSetCount": 50
+        qualifyStandingType: 1,
+        superpoleMaxCar: -1,
+        pitWindowLengthSec: 2400,
+        mandatoryPitstopCount: 1,
+        maxTotalDrivingTime: -1,
+        driverStintTimeSec: -1,
+        maxDriversCount: 1,
+        isRefuellingAllowedInRace: true,
+        isRefuellingTimeFixed: true,
+        isMandatoryPitstopRefuellingRequired: true,
+        isMandatoryPitstopTyreChangeRequired: true,
+        isMandatoryPitstopSwapDriverRequired: false,
+        tyreSetCount: 50
     }
 };
 
 var redlineDivTwoDefault = {
     settings: {
-        serverName: "Redline Sunday Div 2"
-    },
+        serverName: "Redline Racing League - Sunday Div 2 GT3",
+        password: "rrl",
+        adminPassword: "",
+        randomizeTrackWhenEmpty: 0,
+        trackMedalsRequirement: 0,
+        safetyRatingRequirement: -1,
+        racecraftRatingRequirement: -1,
+        allowAutoDQ: -1,
+        spectatorSlots: 0,
+        spectatorPassword: "",
+        dumpLeaderboards: 0,
+        isCPServer: 0,
+        competitionRatingMin: -1,
+        competitionRatingMax: -1,
+        configVersion: 1,
+        isRaceLocked: 0,
+        region: "EU"
+      },
     event: {
-        track: "misano_2019"
+        track: "misano_2019",
+        carGroup: "GT3",
+        preRaceWaitingTimeSeconds: 180,
+        sessionOverTimeSeconds: 180,
+        postQualySeconds: 30,
+        postRaceSeconds: 120,
+        ambientTemp: 26,
+        trackTemp: 30,
+        cloudLevel: 0.3,
+        rain: 0,
+        weatherRandomness: 2,
+        sessions: [
+            {
+                hourOfDay: 12,
+                dayOfWeekend: 1,
+                sessionType: "P",
+                sessionDurationMinutes: 120,
+                timeMultiplier: 2
+              },
+              {
+                sessionType: "Q",
+                dayOfWeekend: 2,
+                hourOfDay: 14,
+                sessionDurationMinutes: 15,
+                timeMultiplier: 2
+              },
+              {
+                sessionType: "R",
+                dayOfWeekend: 3,
+                hourOfDay: 14,
+                sessionDurationMinutes: 60,
+                timeMultiplier: 2
+              }
+        ],
+        configVersion: 1
+    },
+    eventRules: {
+        qualifyStandingType: 1,
+        superpoleMaxCar: -1,
+        pitWindowLengthSec: 2400,
+        mandatoryPitstopCount: 1,
+        maxTotalDrivingTime: -1,
+        driverStintTimeSec: -1,
+        maxDriversCount: 1,
+        isRefuellingAllowedInRace: true,
+        isRefuellingTimeFixed: true,
+        isMandatoryPitstopRefuellingRequired: true,
+        isMandatoryPitstopTyreChangeRequired: true,
+        isMandatoryPitstopSwapDriverRequired: false,
+        tyreSetCount: 50
     }
 };
 
 var redlineGT4Default = {
     settings: {
-        serverName: "Redline GT4 League"
-    },
+        serverName: "Redline Racing League - Wednesday GT4",
+        password: "rrl",
+        adminPassword: "",
+        randomizeTrackWhenEmpty: 0,
+        trackMedalsRequirement: 0,
+        safetyRatingRequirement: -1,
+        racecraftRatingRequirement: -1,
+        allowAutoDQ: -1,
+        spectatorSlots: 0,
+        spectatorPassword: "",
+        dumpLeaderboards: 0,
+        isCPServer: 0,
+        competitionRatingMin: -1,
+        competitionRatingMax: -1,
+        configVersion: 1,
+        isRaceLocked: 0,
+        region: "EU"
+      },
     event: {
-        track: "nurburgring"
+        track: "hungaroring_2019",
+        carGroup: "GT4",
+        preRaceWaitingTimeSeconds: 180,
+        sessionOverTimeSeconds: 180,
+        postQualySeconds: 30,
+        postRaceSeconds: 120,
+        ambientTemp: 26,
+        trackTemp: 30,
+        cloudLevel: 0.3,
+        rain: 0,
+        weatherRandomness: 2,
+        sessions: [
+          {
+            hourOfDay: 12,
+            dayOfWeekend: 1,
+            sessionType: "P",
+            sessionDurationMinutes: 10,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "Q",
+            dayOfWeekend: 2,
+            hourOfDay: 12,
+            sessionDurationMinutes: 4,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "R",
+            dayOfWeekend: 2,
+            hourOfDay: 14,
+            sessionDurationMinutes: 20,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "Q",
+            dayOfWeekend: 3,
+            hourOfDay: 14,
+            sessionDurationMinutes: 4,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "R",
+            dayOfWeekend: 3,
+            hourOfDay: 16,
+            sessionDurationMinutes: 20,
+            timeMultiplier: 2
+          }
+        ],
+        configVersion: 1
+    },
+    eventRules: {
+        qualifyStandingType: 1,
+        superpoleMaxCar: -1,
+        pitWindowLengthSec: -1,
+        mandatoryPitstopCount: 0,
+        maxTotalDrivingTime: -1,
+        driverStintTimeSec: -1,
+        maxDriversCount: 1,
+        isRefuellingAllowedInRace: true,
+        isRefuellingTimeFixed: true,
+        isMandatoryPitstopRefuellingRequired: true,
+        isMandatoryPitstopTyreChangeRequired: true,
+        isMandatoryPitstopSwapDriverRequired: false,
+        tyreSetCount: 50
     }
 };
 
 var redlineEnduranceDefault = {
     settings: {
-        serverName: "Redline 2Hr Endurance"
-    },
+        serverName: "Redline Racing League - Friday 2 Hour Endurance",
+        password: "rrl",
+        adminPassword: "",
+        randomizeTrackWhenEmpty: 0,
+        trackMedalsRequirement: 0,
+        safetyRatingRequirement: -1,
+        racecraftRatingRequirement: -1,
+        allowAutoDQ: -1,
+        spectatorSlots: 0,
+        spectatorPassword: "",
+        dumpLeaderboards: 0,
+        isCPServer: 0,
+        competitionRatingMin: -1,
+        competitionRatingMax: -1,
+        configVersion: 1,
+        isRaceLocked: 0,
+        region: "EU"
+      },
     event: {
-        track: "monza"
+        track: "spa_2019",
+        carGroup: "FreeForAll",
+        preRaceWaitingTimeSeconds: 180,
+        sessionOverTimeSeconds: 180,
+        postQualySeconds: 30,
+        postRaceSeconds: 120,
+        ambientTemp: 26,
+        trackTemp: 30,
+        cloudLevel: 0.3,
+        rain: 0,
+        weatherRandomness: 2,
+        sessions: [
+            {
+                hourOfDay: 12,
+                dayOfWeekend: 1,
+                sessionType: "P",
+                sessionDurationMinutes: 120,
+                timeMultiplier: 2
+              },
+              {
+                sessionType: "Q",
+                dayOfWeekend: 2,
+                hourOfDay: 14,
+                sessionDurationMinutes: 15,
+                timeMultiplier: 2
+              },
+              {
+                sessionType: "R",
+                dayOfWeekend: 3,
+                hourOfDay: 14,
+                sessionDurationMinutes: 120,
+                timeMultiplier: 2
+              }
+        ],
+        configVersion: 1
+    },
+    eventRules: {
+        qualifyStandingType: 1,
+        superpoleMaxCar: -1,
+        pitWindowLengthSec: 2400,
+        mandatoryPitstopCount: 1,
+        maxTotalDrivingTime: -1,
+        driverStintTimeSec: -1,
+        maxDriversCount: 1,
+        isRefuellingAllowedInRace: true,
+        isRefuellingTimeFixed: true,
+        isMandatoryPitstopRefuellingRequired: true,
+        isMandatoryPitstopTyreChangeRequired: true,
+        isMandatoryPitstopSwapDriverRequired: false,
+        tyreSetCount: 50
     }
 };
 
@@ -417,6 +657,11 @@ netlifyIdentity.on('login', user =>
         viewModel.defaults.addPreset(new presetModel('Friday Endurance', 'btn-warning', redlineEnduranceDefault));
     }
 });
+
+// viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 1', 'btn-danger', redlineDivOneDefault));
+// viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 2', 'btn-info', redlineDivTwoDefault));
+// viewModel.defaults.addPreset(new presetModel('Wednesday GT4 ', 'btn-success', redlineGT4Default));
+// viewModel.defaults.addPreset(new presetModel('Friday Endurance', 'btn-warning', redlineEnduranceDefault));
 
 netlifyIdentity.on('logout', () => 
 {
