@@ -69,12 +69,14 @@ function settingsModel(settingsData) {
     self.configVersion = ko.observable(1);
     self.isRaceLocked = ko.observable(0);
     self.region = ko.observable('EU');
+    self.maxCarSlots = ko.numericObservable(0);
 
     self.availabletrackMedalsRequirement = ko.observableArray([0, 1, 2, 3]);
 
     self.load = function(settingsData) {
         self.serverName(settingsData.serverName);
         self.password(settingsData.password);
+        self.adminPassword(settingsData.adminPassword);
         self.randomizeTrackWhenEmpty(settingsData.randomizeTrackWhenEmpty);
         self.trackMedalsRequirement(settingsData.trackMedalsRequirement);
         self.safetyRatingRequirement(settingsData.safetyRatingRequirement);
@@ -89,6 +91,7 @@ function settingsModel(settingsData) {
         self.configVersion(settingsData.configVersion);
         self.isRaceLocked(settingsData.isRaceLocked);
         self.region(settingsData.region);
+        self.maxCarSlots(settingsData.maxCarSlots);
     };
 }
 
