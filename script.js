@@ -552,8 +552,8 @@ var redlineGT4Default = {
         maxDriversCount: 1,
         isRefuellingAllowedInRace: true,
         isRefuellingTimeFixed: true,
-        isMandatoryPitstopRefuellingRequired: true,
-        isMandatoryPitstopTyreChangeRequired: true,
+        isMandatoryPitstopRefuellingRequired: false,
+        isMandatoryPitstopTyreChangeRequired: false,
         isMandatoryPitstopSwapDriverRequired: false,
         tyreSetCount: 50
     }
