@@ -60,7 +60,6 @@ function settingsModel(settingsData) {
     self.safetyRatingRequirement = ko.numericObservable(-1);
     self.racecraftRatingRequirement = ko.numericObservable(-1);
     self.allowAutoDQ = ko.observable(-1);
-    self.spectatorSlots = ko.numericObservable(0);
     self.spectatorPassword = ko.observable('');
     self.dumpLeaderboards = ko.observable(0);
     self.isCPServer = ko.observable(0);
@@ -69,9 +68,10 @@ function settingsModel(settingsData) {
     self.configVersion = ko.observable(1);
     self.isRaceLocked = ko.observable(0);
     self.region = ko.observable('EU');
-    self.maxCarSlots = ko.numericObservable(0);
+    self.maxCarSlots = ko.numericObservable(20);
 
     self.availabletrackMedalsRequirement = ko.observableArray([0, 1, 2, 3]);
+    self.availableMaxCarSlots = ko.observableArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
 
     self.load = function(settingsData) {
         self.serverName(settingsData.serverName);
@@ -82,7 +82,6 @@ function settingsModel(settingsData) {
         self.safetyRatingRequirement(settingsData.safetyRatingRequirement);
         self.racecraftRatingRequirement(settingsData.racecraftRatingRequirement);
         self.allowAutoDQ(settingsData.allowAutoDQ);
-        self.spectatorSlots(settingsData.spectatorSlots);
         self.spectatorPassword(settingsData.spectatorPassword);
         self.dumpLeaderboards(settingsData.dumpLeaderboards);
         self.isCPServer(settingsData.isCPServer);
@@ -293,6 +292,7 @@ var mapping = {
         "availableDayOfWeekend",
         "availableWeatherRandomness",
         "availableCarGroup",
+        "availableMaxCarSlots"
     ]
 }
 
@@ -346,7 +346,7 @@ var redlineDivOneDefault = {
         carGroup: "GT3",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
-        postQualySeconds: 180,
+        postQualySeconds: 30,
         postRaceSeconds: 180,
         ambientTemp: 22,
         trackTemp: 26,
@@ -421,7 +421,7 @@ var redlineDivTwoDefault = {
         carGroup: "GT3",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
-        postQualySeconds: 180,
+        postQualySeconds: 30,
         postRaceSeconds: 180,
         ambientTemp: 22,
         trackTemp: 26,
@@ -496,7 +496,7 @@ var redlineGT4Default = {
         carGroup: "GT4",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
-        postQualySeconds: 180,
+        postQualySeconds: 30,
         postRaceSeconds: 180,
         ambientTemp: 22,
         trackTemp: 26,
@@ -585,7 +585,7 @@ var redlineEnduranceDefault = {
         carGroup: "FreeForAll",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
-        postQualySeconds: 180,
+        postQualySeconds: 30,
         postRaceSeconds: 180,
         ambientTemp: 22,
         trackTemp: 26,
@@ -664,11 +664,6 @@ netlifyIdentity.on('login', user =>
         viewModel.defaults.addPreset(new presetModel('Friday Endurance', 'btn-warning', redlineEnduranceDefault));
     }
 });
-
-// viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 1', 'btn-danger', redlineDivOneDefault));
-// viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 2', 'btn-info', redlineDivTwoDefault));
-// viewModel.defaults.addPreset(new presetModel('Wednesday GT4 ', 'btn-success', redlineGT4Default));
-// viewModel.defaults.addPreset(new presetModel('Friday Endurance', 'btn-warning', redlineEnduranceDefault));
 
 netlifyIdentity.on('logout', () => 
 {
