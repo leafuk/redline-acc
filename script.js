@@ -627,7 +627,7 @@ var redlineEnduranceDefault = {
         maxDriversCount: 1,
         isRefuellingAllowedInRace: true,
         isRefuellingTimeFixed: false,
-        isMandatoryPitstopRefuellingRequired: true,
+        isMandatoryPitstopRefuellingRequired: false,
         isMandatoryPitstopTyreChangeRequired: true,
         isMandatoryPitstopSwapDriverRequired: false,
         tyreSetCount: 50
