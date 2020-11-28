@@ -620,8 +620,8 @@ var redlineEnduranceDefault = {
     eventRules: {
         qualifyStandingType: 1,
         superpoleMaxCar: -1,
-        pitWindowLengthSec: 2400,
-        mandatoryPitstopCount: 1,
+        pitWindowLengthSec: 7200,
+        mandatoryPitstopCount: 2,
         maxTotalDrivingTime: -1,
         driverStintTimeSec: -1,
         maxDriversCount: 1,
