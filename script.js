@@ -492,7 +492,7 @@ var redlineWednesdayGT4Default = {
         maxCarSlots: 20
       },
     event: {
-        track: "hungaroring_2019",
+        track: "brands_hatch_2019",
         carGroup: "GT4",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
