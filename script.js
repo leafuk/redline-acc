@@ -342,7 +342,7 @@ var redlineDivOneDefault = {
         maxCarSlots: 20
       },
     event: {
-        track: "suzuka_2019",
+        track: "brands_hatch_2019",
         carGroup: "GT3",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
@@ -381,7 +381,7 @@ var redlineDivOneDefault = {
     eventRules: {
         qualifyStandingType: 1,
         superpoleMaxCar: -1,
-        pitWindowLengthSec: 1200,
+        pitWindowLengthSec: 2400,
         mandatoryPitstopCount: 1,
         maxTotalDrivingTime: -1,
         driverStintTimeSec: -1,
@@ -417,7 +417,7 @@ var redlineDivTwoDefault = {
         maxCarSlots: 20
       },
     event: {
-        track: "misano_2019",
+        track: "brands_hatch_2019",
         carGroup: "GT3",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
@@ -456,7 +456,7 @@ var redlineDivTwoDefault = {
     eventRules: {
         qualifyStandingType: 1,
         superpoleMaxCar: -1,
-        pitWindowLengthSec: 1200,
+        pitWindowLengthSec: 2400,
         mandatoryPitstopCount: 1,
         maxTotalDrivingTime: -1,
         driverStintTimeSec: -1,
@@ -620,14 +620,14 @@ var redlineEnduranceDefault = {
     eventRules: {
         qualifyStandingType: 1,
         superpoleMaxCar: -1,
-        pitWindowLengthSec: 2400,
-        mandatoryPitstopCount: 1,
+        pitWindowLengthSec: 7200,
+        mandatoryPitstopCount: 2,
         maxTotalDrivingTime: -1,
         driverStintTimeSec: -1,
         maxDriversCount: 1,
         isRefuellingAllowedInRace: true,
-        isRefuellingTimeFixed: true,
-        isMandatoryPitstopRefuellingRequired: true,
+        isRefuellingTimeFixed: false,
+        isMandatoryPitstopRefuellingRequired: false,
         isMandatoryPitstopTyreChangeRequired: true,
         isMandatoryPitstopSwapDriverRequired: false,
         tyreSetCount: 50
