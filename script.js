@@ -60,7 +60,6 @@ function settingsModel(settingsData) {
     self.safetyRatingRequirement = ko.numericObservable(-1);
     self.racecraftRatingRequirement = ko.numericObservable(-1);
     self.allowAutoDQ = ko.observable(-1);
-    self.spectatorSlots = ko.numericObservable(0);
     self.spectatorPassword = ko.observable('');
     self.dumpLeaderboards = ko.observable(0);
     self.isCPServer = ko.observable(0);
@@ -69,18 +68,20 @@ function settingsModel(settingsData) {
     self.configVersion = ko.observable(1);
     self.isRaceLocked = ko.observable(0);
     self.region = ko.observable('EU');
+    self.maxCarSlots = ko.numericObservable(20);
 
     self.availabletrackMedalsRequirement = ko.observableArray([0, 1, 2, 3]);
+    self.availableMaxCarSlots = ko.observableArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
 
     self.load = function(settingsData) {
         self.serverName(settingsData.serverName);
         self.password(settingsData.password);
+        self.adminPassword(settingsData.adminPassword);
         self.randomizeTrackWhenEmpty(settingsData.randomizeTrackWhenEmpty);
         self.trackMedalsRequirement(settingsData.trackMedalsRequirement);
         self.safetyRatingRequirement(settingsData.safetyRatingRequirement);
         self.racecraftRatingRequirement(settingsData.racecraftRatingRequirement);
         self.allowAutoDQ(settingsData.allowAutoDQ);
-        self.spectatorSlots(settingsData.spectatorSlots);
         self.spectatorPassword(settingsData.spectatorPassword);
         self.dumpLeaderboards(settingsData.dumpLeaderboards);
         self.isCPServer(settingsData.isCPServer);
@@ -89,6 +90,7 @@ function settingsModel(settingsData) {
         self.configVersion(settingsData.configVersion);
         self.isRaceLocked(settingsData.isRaceLocked);
         self.region(settingsData.region);
+        self.maxCarSlots(settingsData.maxCarSlots);
     };
 }
 
@@ -304,6 +306,7 @@ var mapping = {
         "availableDayOfWeekend",
         "availableWeatherRandomness",
         "availableCarGroup",
+        "availableMaxCarSlots"
     ]
 }
 
@@ -335,28 +338,29 @@ var redlineDivOneDefault = {
     settings: {
         serverName: "Redline Racing League - Sunday Div 1 GT3",
         password: "rrl",
-        adminPassword: "",
+        adminPassword: "steward",
         randomizeTrackWhenEmpty: 0,
-        trackMedalsRequirement: 0,
+        trackMedalsRequirement: -1,
         safetyRatingRequirement: -1,
         racecraftRatingRequirement: -1,
         allowAutoDQ: -1,
-        spectatorSlots: 0,
-        spectatorPassword: "",
+        spectatorSlots: 20,
+        spectatorPassword: "view",
         dumpLeaderboards: 0,
         isCPServer: 0,
         competitionRatingMin: -1,
         competitionRatingMax: -1,
         configVersion: 1,
         isRaceLocked: 0,
-        region: "EU"
+        region: "EU",
+        maxCarSlots: 20
       },
     event: {
-        track: "suzuka_2019",
+        track: "brands_hatch_2019",
         carGroup: "GT3",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
-        postQualySeconds: 180,
+        postQualySeconds: 30,
         postRaceSeconds: 180,
         ambientTemp: 22,
         trackTemp: 26,
@@ -397,8 +401,8 @@ var redlineDivOneDefault = {
         driverStintTimeSec: -1,
         maxDriversCount: 1,
         isRefuellingAllowedInRace: true,
-        isRefuellingTimeFixed: true,
-        isMandatoryPitstopRefuellingRequired: true,
+        isRefuellingTimeFixed: false,
+        isMandatoryPitstopRefuellingRequired: false,
         isMandatoryPitstopTyreChangeRequired: true,
         isMandatoryPitstopSwapDriverRequired: false,
         tyreSetCount: 50
@@ -409,28 +413,29 @@ var redlineDivTwoDefault = {
     settings: {
         serverName: "Redline Racing League - Sunday Div 2 GT3",
         password: "rrl",
-        adminPassword: "",
+        adminPassword: "steward",
         randomizeTrackWhenEmpty: 0,
-        trackMedalsRequirement: 0,
+        trackMedalsRequirement: -1,
         safetyRatingRequirement: -1,
         racecraftRatingRequirement: -1,
         allowAutoDQ: -1,
-        spectatorSlots: 0,
-        spectatorPassword: "",
+        spectatorSlots: 20,
+        spectatorPassword: "view",
         dumpLeaderboards: 0,
         isCPServer: 0,
         competitionRatingMin: -1,
         competitionRatingMax: -1,
         configVersion: 1,
         isRaceLocked: 0,
-        region: "EU"
+        region: "EU",
+        maxCarSlots: 20
       },
     event: {
-        track: "misano_2019",
+        track: "brands_hatch_2019",
         carGroup: "GT3",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
-        postQualySeconds: 180,
+        postQualySeconds: 30,
         postRaceSeconds: 180,
         ambientTemp: 22,
         trackTemp: 26,
@@ -471,40 +476,41 @@ var redlineDivTwoDefault = {
         driverStintTimeSec: -1,
         maxDriversCount: 1,
         isRefuellingAllowedInRace: true,
-        isRefuellingTimeFixed: true,
-        isMandatoryPitstopRefuellingRequired: true,
+        isRefuellingTimeFixed: false,
+        isMandatoryPitstopRefuellingRequired: false,
         isMandatoryPitstopTyreChangeRequired: true,
         isMandatoryPitstopSwapDriverRequired: false,
         tyreSetCount: 50
     }
 };
 
-var redlineGT4Default = {
+var redlineWednesdayGT4Default = {
     settings: {
         serverName: "Redline Racing League - Wednesday GT4",
         password: "rrl",
-        adminPassword: "",
+        adminPassword: "steward",
         randomizeTrackWhenEmpty: 0,
-        trackMedalsRequirement: 0,
+        trackMedalsRequirement: -1,
         safetyRatingRequirement: -1,
         racecraftRatingRequirement: -1,
         allowAutoDQ: -1,
-        spectatorSlots: 0,
-        spectatorPassword: "",
+        spectatorSlots: 20,
+        spectatorPassword: "view",
         dumpLeaderboards: 0,
         isCPServer: 0,
         competitionRatingMin: -1,
         competitionRatingMax: -1,
         configVersion: 1,
         isRaceLocked: 0,
-        region: "EU"
+        region: "EU",
+        maxCarSlots: 20
       },
     event: {
-        track: "hungaroring_2019",
+        track: "brands_hatch_2019",
         carGroup: "GT4",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
-        postQualySeconds: 180,
+        postQualySeconds: 30,
         postRaceSeconds: 180,
         ambientTemp: 22,
         trackTemp: 26,
@@ -560,8 +566,8 @@ var redlineGT4Default = {
         maxDriversCount: 1,
         isRefuellingAllowedInRace: true,
         isRefuellingTimeFixed: true,
-        isMandatoryPitstopRefuellingRequired: true,
-        isMandatoryPitstopTyreChangeRequired: true,
+        isMandatoryPitstopRefuellingRequired: false,
+        isMandatoryPitstopTyreChangeRequired: false,
         isMandatoryPitstopSwapDriverRequired: false,
         tyreSetCount: 50
     }
@@ -571,28 +577,29 @@ var redlineEnduranceDefault = {
     settings: {
         serverName: "Redline Racing League - Friday 2 Hour Endurance",
         password: "rrl",
-        adminPassword: "",
+        adminPassword: "steward",
         randomizeTrackWhenEmpty: 0,
-        trackMedalsRequirement: 0,
+        trackMedalsRequirement: -1,
         safetyRatingRequirement: -1,
         racecraftRatingRequirement: -1,
         allowAutoDQ: -1,
-        spectatorSlots: 0,
-        spectatorPassword: "",
+        spectatorSlots: 20,
+        spectatorPassword: "view",
         dumpLeaderboards: 0,
         isCPServer: 0,
         competitionRatingMin: -1,
         competitionRatingMax: -1,
         configVersion: 1,
         isRaceLocked: 0,
-        region: "EU"
+        region: "EU",
+        maxCarSlots: 20
       },
     event: {
         track: "spa_2019",
         carGroup: "FreeForAll",
         preRaceWaitingTimeSeconds: 180,
         sessionOverTimeSeconds: 180,
-        postQualySeconds: 180,
+        postQualySeconds: 30,
         postRaceSeconds: 180,
         ambientTemp: 22,
         trackTemp: 26,
@@ -627,15 +634,187 @@ var redlineEnduranceDefault = {
     eventRules: {
         qualifyStandingType: 1,
         superpoleMaxCar: -1,
-        pitWindowLengthSec: 2400,
-        mandatoryPitstopCount: 1,
+        pitWindowLengthSec: 7200,
+        mandatoryPitstopCount: 2,
+        maxTotalDrivingTime: -1,
+        driverStintTimeSec: -1,
+        maxDriversCount: 1,
+        isRefuellingAllowedInRace: true,
+        isRefuellingTimeFixed: false,
+        isMandatoryPitstopRefuellingRequired: false,
+        isMandatoryPitstopTyreChangeRequired: true,
+        isMandatoryPitstopSwapDriverRequired: false,
+        tyreSetCount: 50
+    }
+};
+
+var redlineWednesdayGT3Default = {
+    settings: {
+        serverName: "Redline Racing League - Wednesday GT3",
+        password: "rrl",
+        adminPassword: "steward",
+        randomizeTrackWhenEmpty: 0,
+        trackMedalsRequirement: -1,
+        safetyRatingRequirement: -1,
+        racecraftRatingRequirement: -1,
+        allowAutoDQ: -1,
+        spectatorSlots: 20,
+        spectatorPassword: "view",
+        dumpLeaderboards: 0,
+        isCPServer: 0,
+        competitionRatingMin: -1,
+        competitionRatingMax: -1,
+        configVersion: 1,
+        isRaceLocked: 0,
+        region: "EU",
+        maxCarSlots: 20
+      },
+    event: {
+        track: "kyalami_2019",
+        carGroup: "GT3",
+        preRaceWaitingTimeSeconds: 180,
+        sessionOverTimeSeconds: 180,
+        postQualySeconds: 30,
+        postRaceSeconds: 180,
+        ambientTemp: 22,
+        trackTemp: 26,
+        cloudLevel: 0.3,
+        rain: 0,
+        weatherRandomness: 2,
+        sessions: [
+          {
+            hourOfDay: 12,
+            dayOfWeekend: 1,
+            sessionType: "P",
+            sessionDurationMinutes: 10,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "Q",
+            dayOfWeekend: 2,
+            hourOfDay: 12,
+            sessionDurationMinutes: 10,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "R",
+            dayOfWeekend: 2,
+            hourOfDay: 14,
+            sessionDurationMinutes: 20,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "Q",
+            dayOfWeekend: 3,
+            hourOfDay: 14,
+            sessionDurationMinutes: 10,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "R",
+            dayOfWeekend: 3,
+            hourOfDay: 16,
+            sessionDurationMinutes: 45,
+            timeMultiplier: 2
+          }
+        ],
+        configVersion: 1
+    },
+    eventRules: {
+        qualifyStandingType: 1,
+        superpoleMaxCar: -1,
+        pitWindowLengthSec: -1,
+        mandatoryPitstopCount: 0,
         maxTotalDrivingTime: -1,
         driverStintTimeSec: -1,
         maxDriversCount: 1,
         isRefuellingAllowedInRace: true,
         isRefuellingTimeFixed: true,
-        isMandatoryPitstopRefuellingRequired: true,
-        isMandatoryPitstopTyreChangeRequired: true,
+        isMandatoryPitstopRefuellingRequired: false,
+        isMandatoryPitstopTyreChangeRequired: false,
+        isMandatoryPitstopSwapDriverRequired: false,
+        tyreSetCount: 50
+    }
+};
+
+var redlineTuesdayGT3SpecSeries = {
+    settings: {
+        serverName: "Redline Racing League - Tuesday GT3 Spec Series",
+        password: "rrl",
+        adminPassword: "steward",
+        randomizeTrackWhenEmpty: 0,
+        trackMedalsRequirement: 0,
+        safetyRatingRequirement: -1,
+        racecraftRatingRequirement: -1,
+        allowAutoDQ: 0,
+        spectatorSlots: 20,
+        spectatorPassword: "view",
+        dumpLeaderboards: 0,
+        isCPServer: 0,
+        competitionRatingMin: -1,
+        competitionRatingMax: -1,
+        configVersion: 1,
+        isRaceLocked: 0,
+        region: "EU",
+        maxCarSlots: 20,
+        formationLapType: 0
+      },
+    event: {
+        track: "brands_hatch_2019",
+        carGroup: "GT3",
+        preRaceWaitingTimeSeconds: 180,
+        sessionOverTimeSeconds: 180,
+        postQualySeconds: 30,
+        postRaceSeconds: 240,
+        ambientTemp: 22,
+        trackTemp: 26,
+        cloudLevel: 0.3,
+        rain: 0,
+        weatherRandomness: 2,
+        sessions: [
+          {
+            hourOfDay: 12,
+            dayOfWeekend: 1,
+            sessionType: "P",
+            sessionDurationMinutes: 120,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "Q",
+            dayOfWeekend: 2,
+            hourOfDay: 12,
+            sessionDurationMinutes: 10,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "R",
+            dayOfWeekend: 2,
+            hourOfDay: 14,
+            sessionDurationMinutes: 30,
+            timeMultiplier: 2
+          },
+          {
+            sessionType: "R",
+            dayOfWeekend: 3,
+            hourOfDay: 17,
+            sessionDurationMinutes: 15,
+            timeMultiplier: 2
+          }
+        ],
+        configVersion: 1
+    },
+    eventRules: {
+        qualifyStandingType: 1,
+        superpoleMaxCar: -1,
+        pitWindowLengthSec: -1,
+        mandatoryPitstopCount: 0,
+        maxTotalDrivingTime: -1,
+        driverStintTimeSec: -1,
+        maxDriversCount: 1,
+        isRefuellingAllowedInRace: true,
+        isRefuellingTimeFixed: true,
+        isMandatoryPitstopRefuellingRequired: false,
+        isMandatoryPitstopTyreChangeRequired: false,
         isMandatoryPitstopSwapDriverRequired: false,
         tyreSetCount: 50
     }
@@ -667,15 +846,12 @@ netlifyIdentity.on('login', user =>
     {
         viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 1', 'btn-danger', redlineDivOneDefault));
         viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 2', 'btn-info', redlineDivTwoDefault));
-        viewModel.defaults.addPreset(new presetModel('Wednesday GT4 ', 'btn-success', redlineGT4Default));
-        viewModel.defaults.addPreset(new presetModel('Friday Endurance', 'btn-warning', redlineEnduranceDefault));
+        viewModel.defaults.addPreset(new presetModel('Tuesday GT3 Spec Series', 'btn-warning', redlineTuesdayGT3SpecSeries));
+        viewModel.defaults.addPreset(new presetModel('Wednesday GT3 ', 'btn-dark', redlineWednesdayGT3Default));
+        viewModel.defaults.addPreset(new presetModel('Wednesday GT4 ', 'btn-success', redlineWednesdayGT4Default));
+        viewModel.defaults.addPreset(new presetModel('Friday Endurance', 'btn-warning', redlineEnduranceDefault));    
     }
 });
-
-// viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 1', 'btn-danger', redlineDivOneDefault));
-// viewModel.defaults.addPreset(new presetModel('Sunday GT3 Div 2', 'btn-info', redlineDivTwoDefault));
-// viewModel.defaults.addPreset(new presetModel('Wednesday GT4 ', 'btn-success', redlineGT4Default));
-// viewModel.defaults.addPreset(new presetModel('Friday Endurance', 'btn-warning', redlineEnduranceDefault));
 
 netlifyIdentity.on('logout', () => 
 {

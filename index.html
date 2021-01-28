@@ -160,6 +160,27 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="password">Spectator Password</label>
+                            <input type="text" data-bind="textInput: spectatorPassword" class="form-control" id="spectatorPassword" placeholder="Spectator Password" required>
+                            <small class="text-muted">Password to enter the server as spectator. Must be different to “password” if both is set.</small>
+                            <div class="invalid-feedback">
+                                Valid password is required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="adminPassword">Max Car Slots</label>
+                            <select data-bind="value: maxCarSlots, options: availableMaxCarSlots" class="form-control">
+                            </select>
+                            <small class="text-muted">Defines the amount of car slots the server can occupy; this value is overridden if the pit count of the track is lower, or with 30 for public MP. The gap between maxCarSlots and maxConnections ( in configuration.json ) defines how many spectators or other irregular connections ( ie entry list entries ) can be on the server.</small>
+                            <div class="invalid-feedback">
+                                Valid password is required.
+                            </div>
+                        </div>
+                    </div>
     
                     <div class="row">
                         <div class="col-md-6 mb-3">
