@@ -143,6 +143,20 @@ function eventModel(data) {
             new Option("Hungaroring 2019", "hungaroring_2019"),
             new Option("Zandvoort 2019", "zandvoort_2019")
         ]),
+        new Group("2020", [
+            new Option("Monza 2020", "monza_2020"),
+            new Option("Zolder 2020", "zolder_2020"),
+            new Option("Brands Hatch 2020", "brands_hatch_2020"),
+            new Option("Silverstone 2020", "silverstone_2020"),
+            new Option("Paul Ricard 2020", "paul_ricard_2020"),
+            new Option("Misano 2020", "misano_2020"),
+            new Option("Spa 2020", "spa_2020"),
+            new Option("Nurburgring 2020", "nurburgring_2020"),
+            new Option("Barcelona 2020", "barcelona_2020"),
+            new Option("Hungaroring 2020", "hungaroring_2020"),
+            new Option("Zandvoort 2020", "zandvoort_2020"),
+            new Option("Imola 2020", "imola_2020")
+        ]),
         new Group("DLC", [
             new Option("Kyalami", "kyalami_2019"),
             new Option("Mount Panorama", "mount_panorama_2019"),
